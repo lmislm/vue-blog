@@ -1,10 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueResource from 'vue-resource'
+import VueRouter from 'vue-router'
+import Routes from './routes'
+
 //Http request
 Vue.use(VueResource);
 
+Vue.use(VueRouter);
 
+const router = new VueRouter({
+  routes: Routes
+});
 
 //过滤器
 // Vue.filter('to-uppercase', function (value) {
@@ -37,5 +44,6 @@ Vue.directive('theme',{
 
 new Vue({
   el: '#app',
-  render: h => h(App)
+  render: h => h(App),
+  router: router
 })
