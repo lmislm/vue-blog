@@ -1,37 +1,39 @@
 <template>
   <div id="add-blog">
-    <h2>Add a New Blog Post</h2>
-    <form>
-      <label>Blog Title:</label>
+    <h2>添加博客</h2>
+    <form v-if="!submitted">
+      <label>博客标题:</label>
       <input type="text" v-model.lazy="blog.title" required />
-      <label>Blog Content:</label>
+      <label>博客内容:</label>
       <textarea v-model.lazy.trim="blog.content"></textarea>
       <div id="checkboxes">
-        <p>Blog Categories:</p>
-        <label>Ninjas</label>
+        <p>博客分类:</p>
+        <label>张三</label>
         <input type="checkbox" value="ninjas" v-model="blog.categories" />
-        <label>Wizards</label>
+        <label>李四</label>
         <input type="checkbox" value="wizards" v-model="blog.categories" />
-        <label>Mario</label>
+        <label>王麻子</label>
         <input type="checkbox" value="mario" v-model="blog.categories" />
-        <label>Cheese</label>
+        <label>赵五</label>
         <input type="checkbox" value="cheese" v-model="blog.categories" />
       </div>
-      <label>Author:</label>
+      <label>作者:</label>
       <select v-model="blog.author">
         <option v-for="author in authors">{{ author }}</option>
       </select>
+      <button v-on:click.prevent="post">添加博客</button>
     </form>
+    <div v-if="!submitted"><h3>已添加</h3></div>
     <div id="preview">
-      <h3>Preview blog</h3>
-      <p>Blog title: {{ blog.title }}</p>
-      <p>Blog content:</p>
+      <h3>预览博客</h3>
+      <p>博客标题: {{ blog.title }}</p>
+      <p>博客内容:</p>
       <p style="white-space: pre">{{ blog.content }}</p>
-      <p>Blog Categories:</p>
+      <p>博客分类:</p>
       <ul>
         <li v-for="category in blog.categories">{{ category }}</li>
       </ul>
-      <p>Author: {{ blog.author }}</p>
+      <p>作者: {{ blog.author }}</p>
     </div>
   </div>
 </template>
@@ -47,10 +49,21 @@
           categories: [],
           author: ''
         },
-        authors: ['The Net Ninja', 'The Angular Avenger', 'The Vue Vindicator']
+        authors: ['The Net Ninja', 'The Angular Avenger', 'The Vue Vindicator'],
+        submitted: false,
       }
     },
     methods: {
+      post:function () {
+        this.$http.post('http://jsonplaceholder.typicode.com/posts',{
+          title: this.blog.title,
+          body: this.blog.content,
+          userId: 1
+        }).then(function (data) {
+          console.log(data);
+          this.submitted = true;
+        });
+      }
     }
   }
 </script>
