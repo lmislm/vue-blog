@@ -9,13 +9,13 @@
       <div id="checkboxes">
         <p>博客分类:</p>
         <label>张三</label>
-        <input type="checkbox" value="ninjas" v-model="blog.categories" />
+        <input type="checkbox" value="张三" v-model="blog.categories" />
         <label>李四</label>
-        <input type="checkbox" value="wizards" v-model="blog.categories" />
+        <input type="checkbox" value="李四" v-model="blog.categories" />
         <label>王麻子</label>
-        <input type="checkbox" value="mario" v-model="blog.categories" />
+        <input type="checkbox" value="王麻子" v-model="blog.categories" />
         <label>赵五</label>
-        <input type="checkbox" value="cheese" v-model="blog.categories" />
+        <input type="checkbox" value="赵五" v-model="blog.categories" />
       </div>
       <label>作者:</label>
       <select v-model="blog.author">
@@ -49,17 +49,21 @@
           categories: [],
           author: ''
         },
-        authors: ['The Net Ninja', 'The Angular Avenger', 'The Vue Vindicator'],
+        authors: ['张三', '李四', '王麻子', '赵五', '王六'],
         submitted: false,
       }
     },
     methods: {
       post:function () {
-        this.$http.post('http://jsonplaceholder.typicode.com/posts',{
-          title: this.blog.title,
-          body: this.blog.content,
-          userId: 1
-        }).then(function (data) {
+        // http://jsonplaceholder.typicode.com/posts
+        this.$http.post('https://vue-blog-simple.firebaseio.com/posts.json',
+          this.blog
+          // {
+          // title: this.blog.title,
+          // body: this.blog.content
+          // // userId: 1
+        // }
+        ).then(function (data) {
           console.log(data);
           this.submitted = true;
         });
