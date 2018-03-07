@@ -27,7 +27,8 @@
 
     },
     created(){
-      this.$http.get('https://vue-blog-simple.firebaseio.com/posts.json').then(function (data) {
+      // this.$http.get('https://vue-blog-simple.firebaseio.com/posts.json').then(function (data) {
+      this.$http.get('https://wd0088899390nsjhzr.wilddogio.com/posts.json').then(function (data) {
         return data.json();
         // this.blogs = data.body.slice(0,10);
       }).then(function (data) {

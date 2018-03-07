@@ -56,7 +56,8 @@
     methods: {
       post:function () {
         // http://jsonplaceholder.typicode.com/posts
-        this.$http.post('https://vue-blog-simple.firebaseio.com/posts.json',
+        // this.$http.post('https://vue-blog-simple.firebaseio.com/posts.json',
+        this.$http.post('https://wd0088899390nsjhzr.wilddogio.com/posts.json',
           this.blog
           // {
           // title: this.blog.title,
